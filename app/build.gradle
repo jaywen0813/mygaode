@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('C:\\Users\\Administrator\\mygaode_keystore.jks')
+            storePassword 'android'
+            keyAlias = 'key0'
+            keyPassword 'android'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.android.mygaode"
@@ -10,15 +18,55 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+    signingConfigs {   //签名配置
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-
+            keyAlias "key0"  //别名
+            keyPassword "android" //密码
+            storeFile file('C:\\Users\\Administrator\\mygaode_keystore.jks') //路径一般放在module的根路径下面
+            storePassword "android"
+        }
+        debug {
+            keyAlias "key0"  //别名
+            keyPassword "android" //密码
+            storeFile file('C:\\Users\\Administrator\\mygaode_keystore.jks') //路径一般放在module的根路径下面
+            storePassword "android"
         }
     }
+
+    buildTypes {
+        release {
+            minifyEnabled true //是否启动混淆 ture:打开
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release  //签名
+
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+
+
+
+
+    packagingOptions {
+        exclude 'assets/ap1.data'
+    }
+
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                //这里修改apk文件名
+                outputFileName = "高德地图集成测试" + new Date().format("yyyy-MM-dd HH-mm") + "-versionCode-" + defaultConfig.versionCode + "-versiondes-" + defaultConfig.versionName +  "-" + buildType.name + ".apk"
+            }
+    }
+
+
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,14 +75,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    //3d地图
-    implementation 'com.amap.api:3dmap:latest.integration'
-    //导航
+    //3d地图 和导航
     implementation 'com.amap.api:navi-3dmap:latest.integration'
-    //搜索
-    implementation 'com.amap.api:search:latest.integration'
-    //定位
-    implementation 'com.amap.api:location:latest.integration'
+
 
 }
