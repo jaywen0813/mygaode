@@ -77,7 +77,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //3d地图 和导航
     implementation 'com.amap.api:navi-3dmap:latest.integration'
-
+    //定位
+    implementation 'com.amap.api:location:latest.integration'
+    //搜索
+    implementation 'com.amap.api:search:latest.integration'
 
 
 
