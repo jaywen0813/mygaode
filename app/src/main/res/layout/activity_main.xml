@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +11,17 @@
    <com.amap.api.maps.MapView
        android:id="@+id/mapview"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"></com.amap.api.maps.MapView>
+       android:layout_height="match_parent"/>
 
-</LinearLayout>
+
+
+   <EditText
+       android:id="@+id/et_search"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/dimen_value_dp50"
+       android:layout_marginLeft="@dimen/dimen_value_dp15"
+       android:layout_marginRight="@dimen/dimen_value_dp15"
+       android:layout_marginTop="@dimen/dimen_value_dp70"
+       />
+
+</RelativeLayout>

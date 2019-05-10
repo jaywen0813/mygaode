@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_value_dpF5">-5dp</dimen>
+    <dimen name="dimen_value_dpF3">-3dp</dimen>
+    <dimen name="dimen_value_dp0.5">0.5dp</dimen>
+    <dimen name="dimen_value_dp1">1dp</dimen>
+    <dimen name="dimen_value_dp2">2dp</dimen>
+    <dimen name="dimen_value_dp3">3dp</dimen>
+    <dimen name="dimen_value_dp4">4dp</dimen>
+    <dimen name="dimen_value_dp5">5dp</dimen>
+    <dimen name="dimen_value_dp6">6dp</dimen>
+    <dimen name="dimen_value_dp7">7dp</dimen>
+    <dimen name="dimen_value_dp8">8dp</dimen>
+    <dimen name="dimen_value_dp9">9dp</dimen>
+    <dimen name="dimen_value_dp10">10dp</dimen>
+    <dimen name="dimen_value_dp11">11dp</dimen>
+    <dimen name="dimen_value_dp12">12dp</dimen>
+    <dimen name="dimen_value_dp13">13dp</dimen>
+    <dimen name="dimen_value_dp14">14dp</dimen>
+    <dimen name="dimen_value_dp15">15dp</dimen>
+    <dimen name="dimen_value_dp16">16dp</dimen>
+    <dimen name="dimen_value_dp18">18dp</dimen>
+    <dimen name="dimen_value_dp20">20dp</dimen>
+    <dimen name="dimen_value_dp24">24dp</dimen>
+    <dimen name="dimen_value_dp25">25dp</dimen>
+    <dimen name="dimen_value_dp26">26dp</dimen>
+    <dimen name="dimen_value_dp30">30dp</dimen>
+    <dimen name="dimen_value_dp35">35dp</dimen>
+    <dimen name="dimen_value_dp40">40dp</dimen>
+    <dimen name="dimen_value_dp45">45dp</dimen>
+    <dimen name="dimen_value_dp48">48dp</dimen>
+    <dimen name="dimen_value_dp50">50dp</dimen>
+    <dimen name="dimen_value_dp52">52dp</dimen>
+    <dimen name="dimen_value_dp54">54dp</dimen>
+    <dimen name="dimen_value_dp55">55dp</dimen>
+    <dimen name="dimen_value_dp60">60dp</dimen>
+    <dimen name="dimen_value_dp64">64dp</dimen>
+    <dimen name="dimen_value_dp65">65dp</dimen>
+    <dimen name="dimen_value_dp70">70dp</dimen>
+    <dimen name="dimen_value_dp75">75dp</dimen>
+    <dimen name="dimen_value_dp80">80dp</dimen>
+    <dimen name="dimen_value_dp85">85dp</dimen>
+    <dimen name="dimen_value_dp90">90dp</dimen>
+    <dimen name="dimen_value_dp91">91dp</dimen>
+    <dimen name="dimen_value_dp92">92dp</dimen>
+    <dimen name="dimen_value_dp93">93dp</dimen>
+    <dimen name="dimen_value_dp94">94dp</dimen>
+    <dimen name="dimen_value_dp95">95dp</dimen>
+    <dimen name="dimen_value_dp96">96dp</dimen>
+    <dimen name="dimen_value_dp97">97dp</dimen>
+    <dimen name="dimen_value_dp98">98dp</dimen>
+    <dimen name="dimen_value_dp99">99dp</dimen>
+    <dimen name="dimen_value_dp100">100dp</dimen>
+    <dimen name="dimen_value_dp110">110dp</dimen>
+    <dimen name="dimen_value_dp115">115dp</dimen>
+    <dimen name="dimen_value_dp120">120dp</dimen>
+    <dimen name="dimen_value_dp125">125dp</dimen>
+    <dimen name="dimen_value_dp130">130dp</dimen>
+    <dimen name="dimen_value_dp140">140dp</dimen>
+    <dimen name="dimen_value_dp150">150dp</dimen>
+    <dimen name="dimen_value_dp160">160dp</dimen>
+    <dimen name="dimen_value_dp170">170dp</dimen>
+    <dimen name="dimen_value_dp180">180dp</dimen>
+    <dimen name="dimen_value_dp190">190dp</dimen>
+    <dimen name="dimen_value_dp200">200dp</dimen>
+    <dimen name="dimen_value_dp210">210dp</dimen>
+    <dimen name="dimen_value_dp220">220dp</dimen>
+    <dimen name="dimen_value_dp230">230dp</dimen>
+    <dimen name="dimen_value_dp240">240dp</dimen>
+    <dimen name="dimen_value_dp250">250dp</dimen>
+    <dimen name="dimen_value_dp260">260dp</dimen>
+    <dimen name="dimen_value_dp270">270dp</dimen>
+    <dimen name="dimen_value_dp280">280dp</dimen>
+    <dimen name="dimen_value_dp300">300dp</dimen>
+    <dimen name="dimen_value_dp330">330dp</dimen>
+    <dimen name="dimen_value_dp340">340dp</dimen>
+    <dimen name="dimen_value_dp350">350dp</dimen>
+    <dimen name="dimen_value_dp380">380dp</dimen>
+    <dimen name="dimen_value_dp400">400dp</dimen>
+    <dimen name="dimen_value_dp430">430dp</dimen>
+    <dimen name="dimen_value_dp440">440dp</dimen>
+    <dimen name="dimen_value_dp450">450dp</dimen>
+    <dimen name="dimen_value_dp500">500dp</dimen>
+    <dimen name="dimen_value_dp550">550dp</dimen>
+    <!-- 文字的大小 -->
+    <dimen name="dimen_value_sp8">8sp</dimen>
+    <dimen name="dimen_value_sp10">10sp</dimen>
+    <dimen name="dimen_value_sp11">11sp</dimen>
+    <dimen name="dimen_value_sp12">12sp</dimen>
+    <dimen name="dimen_value_sp13">13sp</dimen>
+    <dimen name="dimen_value_sp14">14sp</dimen>
+    <dimen name="dimen_value_sp15">15sp</dimen>
+    <dimen name="dimen_value_sp16">16sp</dimen>
+    <dimen name="dimen_value_sp18">18sp</dimen>
+    <dimen name="dimen_value_sp20">20sp</dimen>
+    <dimen name="dimen_value_sp22">22sp</dimen>
+    <dimen name="dimen_value_sp24">24sp</dimen>
+    <dimen name="dimen_value_sp30">30sp</dimen>
+    <dimen name="dimen_value_sp45">45sp</dimen>
+    <dimen name="dimen_value_sp50">50sp</dimen>
+    <dimen name="dimen_value_sp120">120sp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="title_bar_height">42dp</dimen>
+    <!--设置 item 高度-->
+    <dimen name="setting_item_height">54dp</dimen>
+
+    <dimen name="dialog_corner_height">8dp</dimen>
+
+    <dimen name="internet_of_vehicles_tab_height_">64dp</dimen>
+
+    <dimen name="certification_pic_height">120dp</dimen>
+
+
+    <!--toast相关-->
+    <dimen name="default_text_size">16sp</dimen>
+    <dimen name="default_corner_radius">5dp</dimen>
+    <dimen name="toast_horizontal_padding_icon_side">20dp</dimen>
+    <dimen name="toast_horizontal_padding_empty_side">25dp</dimen>
+    <dimen name="toast_horizontal_padding">25dp</dimen>
+    <dimen name="toast_vertical_padding">15dp</dimen>
+    <dimen name="drawable_padding">8dp</dimen>
+    <dimen name="icon_size">19dp</dimen>
+
+
+    <dimen name="invoice_line_height">20dp</dimen>
+    <dimen name="invoice_line_r_height">10dp</dimen>
+
+
+    <dimen name="home_max_top">300dp</dimen>
+
+    <!--首页悬浮按钮的大小-->
+    <dimen name="home_flt_button_width">54dp</dimen>
+
+
+</resources>
