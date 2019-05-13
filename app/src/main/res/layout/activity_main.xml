@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
+    android:id="@+id/main_drawer_layout"
     >
+
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+
 
    <com.amap.api.maps.MapView
        android:id="@+id/mapview"
@@ -15,13 +23,99 @@
 
 
 
-   <EditText
-       android:id="@+id/et_search"
+   <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="@dimen/dimen_value_dp50"
-       android:layout_marginLeft="@dimen/dimen_value_dp15"
-       android:layout_marginRight="@dimen/dimen_value_dp15"
        android:layout_marginTop="@dimen/dimen_value_dp70"
-       />
+       android:orientation="horizontal"
+       android:gravity="center_vertical"
+       >
 
-</RelativeLayout>
+      <ImageView
+          android:id="@+id/img_menu"
+          android:layout_width="@dimen/dimen_value_dp50"
+          android:layout_height="match_parent"
+          android:src="@mipmap/caidan"
+          android:scaleType="fitXY"
+          android:layout_marginLeft="@dimen/dimen_value_dp5"
+          />
+
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:background="@color/white"
+          >
+
+         <EditText
+             android:id="@+id/et_search"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:layout_marginLeft="@dimen/dimen_value_dp5"
+             android:background="@null"
+             android:textColor="@color/color_3d3d3d"
+             android:hint="请输入您要搜索的内容"
+             android:textColorHint="@color/color_989898"
+             />
+
+         <View
+             android:layout_width="@dimen/dimen_value_dp0.5"
+             android:layout_height="match_parent"
+             android:layout_marginTop="@dimen/dimen_value_dp10"
+             android:layout_marginBottom="@dimen/dimen_value_dp10"
+             android:background="@color/color_989898"
+             />
+
+
+         <ImageView
+             android:layout_width="@dimen/dimen_value_dp50"
+             android:layout_height="@dimen/dimen_value_dp30"
+             android:src="@mipmap/sousuo"
+             />
+
+      </LinearLayout>
+
+
+   </LinearLayout>
+   </RelativeLayout>
+
+   <!-- 左侧滑动栏 -->
+   <LinearLayout
+       android:id="@+id/main_left_drawer_layout"
+       android:layout_width="@dimen/dimen_value_dp250"
+       android:layout_height="match_parent"
+       android:layout_gravity="start"
+       android:background="@color/color_d8d8d8"
+       android:paddingTop="50dp"
+       android:orientation="vertical"
+       >
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dimen_value_dp50"
+          android:layout_marginTop="@dimen/dimen_value_dp50"
+          android:text="天气预报"
+          android:textColor="@color/color_3d3d3d"
+          android:textSize="@dimen/dimen_value_sp14"
+          android:gravity="center"
+          />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dimen_value_dp50"
+          android:text="计算器"
+          android:textColor="@color/color_3d3d3d"
+          android:textSize="@dimen/dimen_value_sp14"
+          android:gravity="center"
+          />
+
+
+   </LinearLayout>
+
+
+
+
+</android.support.v4.widget.DrawerLayout>
