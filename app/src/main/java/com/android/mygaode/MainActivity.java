@@ -5,18 +5,24 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -34,6 +40,7 @@ import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.RouteSearch;
 import com.android.mygaode.weight.StatusBarUtils;
 import com.android.mygaode.weight.StatusbarColorUtils;
+import com.android.mygaode.weight.UIUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,6 +59,26 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
 
     MapView mapView;
     AMap aMap;
+
+
+
+    private EditText etSearch;
+    private ImageView imgSousuo;
+    private RelativeLayout bottomSheet;
+    private LinearLayout llBottom;
+    private TextView tvMyaddress;
+    private TextView tvChakan;
+    private ListView listview;
+
+    private TextView tvWeather;
+    private TextView tvJisuanqi;
+
+
+
+
+
+
+
 
     //北京市的经纬度   默认进来是北京，后面定位成功以后，中心点始终是自己
     private LatLng centerWHpoint = new LatLng(39.910066, 116.386695);
@@ -74,6 +101,9 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
     LatLng mylatlng;//自己的经纬度
 
 
+    private BottomSheetBehavior<RelativeLayout> behavior;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,9 +124,32 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
 
     private void initView() {
         mapView=findViewById(R.id.mapview);
+        etSearch = findViewById(R.id.et_search);
+        imgSousuo = findViewById(R.id.img_sousuo);
+        bottomSheet = findViewById(R.id.bottom_sheet);
+        llBottom = findViewById(R.id.ll_bottom);
+
+
+
+
+        tvMyaddress = findViewById(R.id.tv_myaddress);
+        tvChakan = findViewById(R.id.tv_chakan);
+        listview = findViewById(R.id.listview);
+        tvWeather = findViewById(R.id.tv_weather);
+        tvJisuanqi = findViewById(R.id.tv_jisuanqi);
+
+
         //上面的菜单按钮
         img_menu=findViewById(R.id.img_menu);
-        img_menu.setOnClickListener(this);
+
+
+        llBottom.setOnClickListener(this);//查看更多
+        img_menu.setOnClickListener(this);//左上角的菜单按钮
+        imgSousuo.setOnClickListener(this);//搜索
+
+        tvWeather.setOnClickListener(this);//天气
+        tvJisuanqi.setOnClickListener(this);//计算器
+
 
         drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         //设置菜单内容之外其他区域的背景色
@@ -109,12 +162,49 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
 
        mapInit();
 
+
+
+        //底部抽屉栏展示地址
+        behavior = BottomSheetBehavior.from(bottomSheet);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, @BottomSheetBehavior.State int newState) {
+                String state = "null";
+                switch (newState) {
+                    case 1:
+                        state = "STATE_DRAGGING";//过渡状态此时用户正在向上或者向下拖动bottom sheet
+                        break;
+                    case 2:
+                        state = "STATE_SETTLING"; // 视图从脱离手指自由滑动到最终停下的这一小段时间
+                        break;
+                    case 3:
+                        state = "STATE_EXPANDED"; //处于完全展开的状态
+
+                        break;
+                    case 4:
+                        state = "STATE_COLLAPSED"; //默认的折叠状态
+//                        bottomSheet.setVisibility(View.VISIBLE);
+
+                        break;
+                    case 5:
+                        state = "STATE_HIDDEN"; //下滑动完全隐藏 bottom sheet
+//                        behavior.setPeekHeight(UIUtils.dip2px(100));
+//                        T.showToastSafeError("到了最下面了");
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//                Log.d("BottomSheetDemo", "slideOffset:" + slideOffset);
+            }
+        });
+
+
+
     }
-
-
-
-
-
 
 
 
@@ -353,8 +443,6 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
             aMap.setLocationSource(this);//设置了定位的监听,这里要实现LocationSource接口
             // 是否显示定位按钮
             settings.setMyLocationButtonEnabled(false);
-
-            //设置地图的放缩级别
 
 
 
