@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+//测试2019年5月18日 21:25:13
 public class MainActivity extends AppCompatActivity implements  LocationSource, AMapLocationListener,View.OnClickListener {
 
     // 抽屉菜单对象
