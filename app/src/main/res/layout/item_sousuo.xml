@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dimen_value_dp10"
+        android:paddingTop="@dimen/dimen_value_dp10"
+
+        >
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="中国石油"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_value_sp15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_value_dp40"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_value_dp5"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="1000m"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_value_sp13" />
+
+            <View
+                android:id="@+id/collection_view"
+                android:layout_width="@dimen/dimen_value_dp1"
+                android:layout_height="@dimen/dimen_value_sp15"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_value_dp10"
+                android:background="@color/regis_bg" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/dimen_value_dp10"
+                android:gravity="center|left"
+                android:text="中国石油宁康路加油站"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_value_sp13"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:scrollHorizontally="false"
+                />
+
+            <ImageView
+                android:id="@+id/img_daohang2"
+                android:layout_width="@dimen/dimen_value_dp40"
+                android:layout_height="@dimen/dimen_value_dp40"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_value_dp15"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+        <!--<com.flyco.roundview.RoundTextView-->
+            <!--android:id="@+id/rtv_jiayou"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingBottom="@dimen/dimen_value_dp2"-->
+            <!--android:paddingLeft="@dimen/dimen_value_dp5"-->
+            <!--android:paddingRight="@dimen/dimen_value_dp5"-->
+            <!--android:paddingTop="@dimen/dimen_value_dp2"-->
+            <!--android:layout_marginBottom="@dimen/dimen_value_dp10"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--app:rv_backgroundPressColor="@color/white"-->
+            <!--app:rv_cornerRadius="@dimen/dimen_value_dp5"-->
+            <!--app:rv_strokeColor="@color/colorPrimary"-->
+            <!--app:rv_strokeWidth="@dimen/dimen_value_dp1"-->
+            <!--android:visibility="visible"-->
+            <!--/>-->
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
