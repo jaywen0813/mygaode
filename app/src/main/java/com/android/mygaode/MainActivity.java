@@ -36,7 +36,9 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
@@ -73,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
     private EditText etSearch;
     private ImageView imgSousuo;
     private RelativeLayout bottomSheet;
-    private LinearLayout llBottom;
-    private TextView tvMyaddress;
-    private TextView tvChakan;
+    private LinearLayout llBottom,llBottom2;
+    private TextView tvMyaddress,tvMyaddress2;
+    private TextView tvChakan,tvChakan2;
     private ListView listview;
 
     private TextView tvWeather;
@@ -114,16 +116,26 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
     double mylng;
 
     LatLng mylatlng;//自己的经纬度
+    LatLonPoint mylatlngpoint;//搜索时，自己的位置为中心点
 
 
-    private BottomSheetBehavior<RelativeLayout> behavior;
-
+    private BottomSheetBehavior<RelativeLayout> behavior;//滑动控件
 
 
     SearchAdapters adapters;
 
+//搜索相关
 
+    //搜索列表集合
+    LatLngBounds.Builder newbounds2;
+    List<PoiItem> poiItems;//搜索后赋值的集合
+    private PoiSearch.SearchBound searchBound;
 
+    //用来搜索的时候，识别是否是常用字
+    List<String> aa=new ArrayList<>();
+
+    //旧的地图标记
+    private Marker oldMarker;
 
 
     @Override
@@ -136,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
 
         //初始化
         initView();
+        initPageData();//添加搜索数据
         mapView.onCreate(savedInstanceState);
 
 //        StatusBarUtils.with(this)
@@ -143,19 +156,185 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
         StatusBarUtils.setStatusTransparent(this);
 
     }
+    protected void initPageData() {
+        aa.add("加油站");
+        aa.add("厕所");
+        aa.add("洗车");
+        aa.add("停车场");
+        aa.add("美食");
+        aa.add("洗浴");
+        aa.add("网吧");
+        aa.add("商场");
+        aa.add("超市");
+        aa.add("医院");
+        aa.add("足疗");
+        aa.add("快递");
+        aa.add("药店");
+        aa.add("KTV");
+        aa.add("夜店");
+        aa.add("美容美发");
+        aa.add("电讯营业厅");
+        aa.add("电信营业厅");
+        aa.add("移动营业厅");
+        aa.add("联通营业厅");
+        aa.add("快餐");
+        aa.add("中餐");
+        aa.add("火锅");
+        aa.add("咖啡厅");
+        aa.add("咖啡店");
+        aa.add("小吃");
+        aa.add("自助餐");
+        aa.add("茶餐厅");
+        aa.add("肯德基");
+        aa.add("蛋糕店");
+        aa.add("周黑鸭");
+        aa.add("糕饼店");
+        aa.add("绝味鸭脖");
+        aa.add("日本料理");
+        aa.add("韩国料理");
+        aa.add("清真");
+        aa.add("麦当劳");
+        aa.add("海底捞");
+        aa.add("必胜客");
+        aa.add("蛋糕房");
+        aa.add("甜品店");
+        aa.add("冷饮店");
+        aa.add("奶茶店");
+        aa.add("火锅自助");
+        aa.add("星巴克");
+        aa.add("德克士");
+        aa.add("宾馆");
+        aa.add("星级酒店");
+        aa.add("酒店");
+        aa.add("快捷酒店");
+        aa.add("青年旅舍");
+        aa.add("度假公寓");
+        aa.add("招待所");
+        aa.add("钟点房");
+        aa.add("如家");
+        aa.add("汉庭");
+        aa.add("旅馆");
+        aa.add("三星级");
+        aa.add("四星级");
+        aa.add("五星级");
+        aa.add("维也纳酒店");
+        aa.add("家庭旅馆");
+        aa.add("速8");
+        aa.add("布丁");
+        aa.add("莫泰");
+        aa.add("锦江之星");
+        aa.add("7天");
+        aa.add("地铁站");
+        aa.add("公交站");
+        aa.add("公园");
+        aa.add("广场");
+        aa.add("银行");
+        aa.add("快递");
+        aa.add("诊所");
+        aa.add("理发店");
+        aa.add("学校");
+        aa.add("宠物");
+        aa.add("邮局");
+        aa.add("中通");
+        aa.add("圆通");
+        aa.add("申通");
+        aa.add("顺丰");
+        aa.add("韵达");
+        aa.add("民生银行");
+        aa.add("交通银行");
+        aa.add("招商银行");
+        aa.add("中信银行");
+        aa.add("浦发银行");
+        aa.add("平安银行");
+        aa.add("华夏银行");
+        aa.add("兴业银行");
+        aa.add("图书馆");
+        aa.add("步行街");
+        aa.add("便利店");
+        aa.add("五金店");
+        aa.add("万达广场");
+        aa.add("书店");
+        aa.add("花店");
+        aa.add("沃尔玛");
+        aa.add("家乐福");
+        aa.add("大润发");
+        aa.add("物美");
+        aa.add("华润万家");
+        aa.add("眼镜店");
+        aa.add("海澜之家");
+        aa.add("文具店");
+        aa.add("家具城");
+        aa.add("菜市场");
+        aa.add("水果批发市场");
+        aa.add("批发市场");
+        aa.add("邮政储蓄");
+        aa.add("服装城");
+        aa.add("健身房");
+        aa.add("派出所");
+        aa.add("中国银行");
+        aa.add("旅行社");
+        aa.add("工商银行");
+        aa.add("农业银行");
+        aa.add("建设银行");
+        aa.add("动物园");
+        aa.add("植物园");
+        aa.add("体育馆");
+        aa.add("修车");
+        aa.add("中石化");
+        aa.add("驾校");
+        aa.add("加气站");
+        aa.add("服务区");
+        aa.add("鲁菜");
+        aa.add("川菜");
+        aa.add("粤菜");
+        aa.add("淮扬菜");
+        aa.add("闽菜");
+        aa.add("浙江菜");
+        aa.add("湘菜");
+        aa.add("徽菜");
+        aa.add("京菜");
+        aa.add("鄂菜");
+        aa.add("西北菜");
+        aa.add("海鲜");
+        aa.add("东北菜");
+        aa.add("素食");
+        aa.add("烤肉");
+        aa.add("西餐");
+        aa.add("茶艺馆");
+        aa.add("全聚德");
+        aa.add("创意菜");
+        aa.add("新疆菜");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
+//        aa.add("");
 
+    }
     private void initView() {
         mapView=findViewById(R.id.mapview);
         etSearch = findViewById(R.id.et_search);
         imgSousuo = findViewById(R.id.img_sousuo);
         bottomSheet = findViewById(R.id.bottom_sheet);
         llBottom = findViewById(R.id.ll_bottom);
-
+        llBottom2=findViewById(R.id.ll_bottom2);
 
 
 
         tvMyaddress = findViewById(R.id.tv_myaddress);
+        tvMyaddress2 = findViewById(R.id.tv_myaddress2);
         tvChakan = findViewById(R.id.tv_chakan);
+        tvChakan2 = findViewById(R.id.tv_chakan2);
         listview = findViewById(R.id.listview);
         tvWeather = findViewById(R.id.tv_weather);
         tvJisuanqi = findViewById(R.id.tv_jisuanqi);
@@ -165,7 +344,8 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
         img_menu=findViewById(R.id.img_menu);
 
 
-        llBottom.setOnClickListener(this);//查看更多
+        llBottom.setOnClickListener(this);//
+        llBottom2.setOnClickListener(this);//查看更多
         img_menu.setOnClickListener(this);//左上角的菜单按钮
         imgSousuo.setOnClickListener(this);//搜索
 
@@ -205,13 +385,28 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
                         break;
                     case 4:
                         state = "STATE_COLLAPSED"; //默认的折叠状态
-//                        bottomSheet.setVisibility(View.VISIBLE);
+                        bottomSheet.setVisibility(View.VISIBLE);
+                        llBottom.setVisibility(View.VISIBLE);
+                        llBottom2.setVisibility(View.GONE);
+                        tvChakan2.setVisibility(View.GONE);
 
                         break;
                     case 5:
                         state = "STATE_HIDDEN"; //下滑动完全隐藏 bottom sheet
 //                        behavior.setPeekHeight(UIUtils.dip2px(100));
 //                        T.showToastSafeError("到了最下面了");
+
+                        if (poiItems!=null){
+                            llBottom.setVisibility(View.GONE);
+                            llBottom2.setEnabled(true);
+                            llBottom2.setVisibility(View.VISIBLE);
+                            tvChakan2.setVisibility(View.VISIBLE);
+                        }else {
+                            llBottom2.setEnabled(false);
+                            tvChakan2.setVisibility(View.GONE);
+                        }
+
+
                         break;
 
                 }
@@ -240,6 +435,16 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
 
         poiSearch = new PoiSearch(this, query);
         poiSearch.setOnPoiSearchListener(this);
+        //点附近10000米内的搜索结果
+        for (int i = 0; i <aa.size() ; i++) {
+            if (keyWord.equals(aa.get(i))){
+                if (mylatlngpoint != null) {
+                    searchBound = new PoiSearch.SearchBound(mylatlngpoint, 10000);
+                    poiSearch.setBound(searchBound);
+                    break;
+                }
+            }
+        }
         poiSearch.searchPOIAsyn();
     }
 
@@ -340,6 +545,7 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
                 mylng = amapLocation.getLongitude();//自己的经度
 
                  mylatlng=new LatLng(mylat,mylng);
+                 mylatlngpoint=new LatLonPoint(mylat, mylng);
 
                  centerWHpoint=mylatlng;
 
@@ -347,6 +553,9 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
 
                 myCity=amapLocation.getCity();//当前所在城市
 
+                //显示自己的地址信息
+                tvMyaddress.setText(amapLocation.getProvince()+amapLocation.getCity()+amapLocation.getDistrict()+amapLocation.getStreet()+amapLocation.getStreetNum());
+                tvMyaddress2.setText(amapLocation.getProvince()+amapLocation.getCity()+amapLocation.getDistrict()+amapLocation.getStreet()+amapLocation.getStreetNum());
 
                 Log.e("qqqq", "地址:" + address + "----国家信息:" + country + "----time--> " + format);
 
@@ -510,6 +719,8 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
             aMap.setMyLocationEnabled(true);//显示定位层并且可以触发定位,默认是flase
         }
 
+        aMap.setOnMarkerClickListener(this);//设置Marker的监听
+
 
         //蓝点初始化
         myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
@@ -570,25 +781,53 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.img_menu:
+            case R.id.img_menu://左边的菜单按钮
                 openLeftLayout(img_menu);
                 break;
-            case R.id.img_sousuo:
+            case R.id.img_sousuo://搜索按钮
+                if (!(poiItems==null||poiItems.equals(""))){
+                    poiItems.clear();//先清除上次的
+                    aMap.clear();
+                    mapInit();
+                }
+
+
                 keyWord=etSearch.getText().toString();
                 if (keyWord==null||keyWord.equals("")){
                     Toast.makeText(MainActivity.this,"搜索内容不能为空",Toast.LENGTH_LONG).show();
+
+                    llBottom2.setVisibility(View.VISIBLE);
+                    tvChakan2.setVisibility(View.GONE);
                 }else {
                     doSearchQuery();//进行搜索
                 }
-
+                break;
+            case R.id.ll_bottom2://我的位置 底部弹窗按钮
+                behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);//默认的折叠状态 中间
+                llBottom.setVisibility(View.VISIBLE);
                 break;
         }
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        return false;
+
+        if (!marker.getPosition().equals(mylatlng) ) { //点击的marker不是自己位置的那个marker
+            if (oldMarker != null) {
+                oldMarker.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.maplittleother));
+                oldMarker.hideInfoWindow();
+            }
+            oldMarker = marker;
+
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.mapbigother));
+        } else if (marker.getPosition().equals(mylatlng)) {//如果是自己的Marker
+            oldMarker.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.maplittleother));
+            oldMarker.hideInfoWindow();
+
+        }
+        return false;//false 点击marker marker会移动到地图中心，true则不会
     }
+
 
     /**
      * POI信息查询回调方法
@@ -601,14 +840,14 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
                 if (result.getQuery().equals(query)) {// 是否是同一条
                     poiResult = result;
                     // 取得搜索到的poiitems有多少页
-                    List<PoiItem> poiItems = poiResult.getPois();// 取得第一页的poiitem数据，页数从数字0开始
+                     poiItems = poiResult.getPois();// 取得第一页的poiitem数据，页数从数字0开始
                     List<SuggestionCity> suggestionCities = poiResult
                             .getSearchSuggestionCitys();// 当搜索不到poiitem数据时，会返回含有搜索关键字的城市信息
 
                     if (poiItems != null && poiItems.size() > 0) {
 //                        aMap.clear();// 清理之前的图标
 
-                        adapters=new SearchAdapters(this,poiItems);
+                        adapters=new SearchAdapters(this,poiItems,mylatlng);
                         listview.setAdapter(adapters);
 
 
@@ -617,6 +856,27 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
 //                        poiOverlay.removeFromMap();
 //                        poiOverlay.addToMap();
 //                        poiOverlay.zoomToSpan();
+
+
+                        //添加集合里的10条数据到地图上标记
+                        newbounds2 = new LatLngBounds.Builder();
+
+                        for (int j = 0; j < poiItems.size(); j++) {
+                            LatLng latLng = new LatLng(poiItems.get(j).getLatLonPoint().getLatitude(), poiItems.get(j).getLatLonPoint().getLongitude());
+
+                            //在地图上绘制搜索出来的点
+                            drawMarkers(latLng, poiItems.get(j).getTitle());
+
+                            newbounds2.include(latLng);
+
+                        }
+
+                        //根据搜索返回的距离，设置不同地图比例
+//                        aMap.moveCamera(CameraUpdateFactory.changeLatLng(myLatlng));
+//                        aMap.moveCamera(CameraUpdateFactory.zoomTo(distanceUtil.scaleZoom(max)));
+                        aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(newbounds2.build(),200));//第二个参数为四周留空宽度
+
+
                     } else if (suggestionCities != null
                             && suggestionCities.size() > 0) {
                         showSuggestCity(suggestionCities);
@@ -632,6 +892,17 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
         }
     }
 
+    //绘制搜索出来的点
+    public void drawMarkers(LatLng latLng, String title) {
+
+        Marker  marker = aMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(title)
+                        .icon(BitmapDescriptorFactory
+                                .fromResource(R.mipmap.maplittleother))
+                        .draggable(true));
+
+    }
 
     /**
      * poi没有搜索到数据，返回一些推荐城市的信息

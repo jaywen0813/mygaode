@@ -41,6 +41,8 @@
                 android:src="@mipmap/caidan"
                 android:scaleType="fitXY"
                 android:layout_marginLeft="@dimen/dimen_value_dp5"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 />
 
 
@@ -50,6 +52,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@color/white"
+
                 >
 
                <EditText
@@ -62,6 +65,7 @@
                    android:textColor="@color/color_3d3d3d"
                    android:hint="请输入您要搜索的内容"
                    android:textColorHint="@color/color_989898"
+
                    />
 
                <View
@@ -90,7 +94,64 @@
 
 
 
+          <LinearLayout
+              android:id="@+id/ll_bottom2"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/dimen_value_dp60"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:gravity="center_vertical"
+              android:layout_alignParentBottom="true"
+              android:visibility="gone"
+              >
 
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="@dimen/dimen_value_dp10"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal"
+                  android:background="@color/white"
+                  >
+
+                  <ImageView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:src="@mipmap/nearby_location" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="@dimen/dimen_value_dp5"
+                      android:text="我的位置"
+                      android:textColor="@color/color_3d3d3d"
+                      android:textSize="@dimen/dimen_value_sp15" />
+
+
+              </LinearLayout>
+
+              <TextView
+                  android:id="@+id/tv_myaddress2"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="@dimen/dimen_value_dp10"
+                  android:text=" "
+                  android:textColor="@color/color_8e8e8e"
+                  android:textSize="@dimen/dimen_value_sp13"
+
+                  />
+
+              <TextView
+                  android:id="@+id/tv_chakan2"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/dimen_value_dp20"
+                  android:gravity="center"
+                  android:text="查看更多>>"
+                  android:textColor="@color/colorPrimary"
+                  android:visibility="gone" />
+
+
+          </LinearLayout>
 
       </RelativeLayout>
 
@@ -180,7 +241,13 @@
 
 
 
+
+
+
       </RelativeLayout>
+
+
+
 
    </android.support.design.widget.CoordinatorLayout>
 
