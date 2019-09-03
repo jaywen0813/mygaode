@@ -35,6 +35,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CustomMapStyleOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
@@ -52,6 +53,8 @@ import com.android.mygaode.weight.StatusBarUtils;
 import com.android.mygaode.weight.StatusbarColorUtils;
 import com.android.mygaode.weight.UIUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -719,6 +722,10 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
             aMap.setMyLocationEnabled(true);//显示定位层并且可以触发定位,默认是flase
         }
 
+        //设置自定义地图的方法
+//        zhuti();
+
+
         aMap.setOnMarkerClickListener(this);//设置Marker的监听
 
 
@@ -748,6 +755,39 @@ public class MainActivity extends AppCompatActivity implements  LocationSource, 
         mUiSettings.setZoomControlsEnabled(false);//隐藏放大缩小按钮
 
 
+    }
+
+    //设置自定义地图样式的方法
+    private void zhuti() {
+        byte[]  buffer1 = null;
+        byte[]  buffer2 = null;
+        InputStream is1 = null;
+        InputStream is2 = null;
+        try {
+            is1 = this.getAssets().open("style.data");
+            int lenght1 = is1.available();
+            buffer1 = new byte[lenght1];
+            is1.read(buffer1);
+            is2 = this.getAssets().open("style_extra.data");
+            int lenght2 = is2.available();
+            buffer2 = new byte[lenght2];
+            is2.read(buffer2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (is1!=null)
+                    is1.close();
+                if (is2!=null)
+                    is2.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        CustomMapStyleOptions customMapStyleOptions = new CustomMapStyleOptions();
+        customMapStyleOptions.setStyleData(buffer1);
+        customMapStyleOptions.setStyleExtraData(buffer2);
+        aMap.setCustomMapStyle(customMapStyleOptions);
     }
 
     //设置开关监听
